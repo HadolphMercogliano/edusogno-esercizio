@@ -47,7 +47,7 @@
           <button type="submit" id="submitBtn">registrati</button>
         </div>
       </form>
-      <a href="#">Hai già un account? <b>Accedi</b></a>
+      <a href="./login.php">Hai già un account? <b>Accedi</b></a>
     </div>
   </main>
 
