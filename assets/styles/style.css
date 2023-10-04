@@ -1,0 +1,94 @@
+/* RESET */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+    max-width: 100%;
+    height: 100%;
+}
+/*  */
+
+body {
+  height:100vh;
+  background-color:#D9E5F3;
+  font-family: sans-serif;
+}
+
+ header {
+  background-color:white;
+   height: 160px;
+   border-radius:0  0 20px 20px;
+   box-shadow: 0px 4px 18px -6px #0057FF;
+}
+
+header .logo {
+  height: 100%;
+}
+
+header > .logo > img{
+  padding:40px 50px;
+}
+
+main > h1 {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: #134077;
+}
+
+.form-area {
+  background-color: white;
+  border-radius: 19px;
+  border: 1px solid;
+  width: 50%;
+  margin: 0 auto;
+  padding: 40px;
+}
+.form-area > form >div {
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+
+}
+.form-area > form input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-size: 2rem ;
+  font-weight: normal
+} 
+.form-area > form input:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+
+}
+ .submit-button {
+   display: flex;
+   justify-content: center;
+   margin: 40px 0;
+
+}
+
+#submitBtn {
+  text-transform: uppercase;
+  border-radius: 11px;
+  background: #0057FF;
+  color: white;
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 4rem;
+   cursor: pointer;
+}
+#submitBtn:hover {
+  background-color: white;
+  color: #0057FF;
+}
+a {
+  display: block;
+  color: black;
+  text-align: center;
+}
