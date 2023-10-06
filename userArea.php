@@ -1,23 +1,24 @@
 <?php
-if (isset($_POST["email"]) && isset($_POST["password"])) {
-  
-  // se il form è stato inviato includo la connessione al database
-  require_once __DIR__ . "/includes/database.php";
-  require_once __DIR__ . "/includes/functions.php";
-  
-
-  $email = $_POST["email"];
-  $password = md5($_POST["password"]);
-  
-  $success = login($conn, $email,$password);
-
-  if (!$success) {
-    $error_message = "Errore di login. Email o password non validi.";
+if(session_status() != PHP_SESSION_ACTIVE) {
+  session_start();
+  if (isset($_SESSION["user_name"])) {
+    $nome = $_SESSION["user_name"];
+    
   }
+  else {
+    header("Location: index.php");
+    exit;
+  }
+  session_write_close();
 }
 
-?>
 
+if (isset($_POST["logout"])) {
+    require_once __DIR__ . "/includes/functions.php";
+    logout();
+    session_write_close();
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,34 +36,12 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     <div class="logo">
       <img src="https://edusogno.com/logo-black.svg" alt="">
     </div>
+    <form id="logoutForm" method="POST">
+      <button name="logout" value="1">Logout</button>
+    </form>
   </header>
   <main>
-    <h1>Hai già un account?</h1>
-    <div class="form-area">
-
-      <?php if (isset($error_message)): ?>
-      <p class="error-message"><?php echo $error_message; ?></p>
-      <?php endif; ?>
-
-      <form method="post">
-
-        <div>
-          <label for="email">Inserisci l'email</label>
-          <input type="email" id="email" placeholder="name@example.com" name="email" required>
-        </div>
-
-        <div>
-          <label for="password">Inserisci la password</label>
-          <input type="password" id="password" placeholder="Scrivila qui" name="password" required>
-        </div>
-
-        <div class="submit-button">
-          <button type="submit" id="submitBtn">accedi</button>
-        </div>
-
-      </form>
-      <a href="./register.php">Non hai ancora un profilo?<b> Registrati</b></a>
-    </div>
+    <h1>ciao <?php echo $nome; ?> ecco le tue taks</h1>
   </main>
 
   <!-- WAVES & BACKGROUND ELEMENTS -->

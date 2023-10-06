@@ -16,28 +16,34 @@
     </div>
   </header>
   <main>
-    <h1>Hai già un account?</h1>
+    <h1>Crea il tuo account</h1>
     <div class="form-area">
-      <form action="">
+      <form method="POST">
+        <div>
+          <label for="name">Inserisci il nome</label> <br>
+          <input type="text" placeholder="Mario" id="name" name="name">
+        </div>
+
+        <div>
+          <label for="surname">Inserisci il cognome</label>
+          <input type="text" id="surname" placeholder="Rossi" name="surname">
+        </div>
 
         <div>
           <label for="email">Inserisci l'email</label>
-          <input type="email" id="email" placeholder="name@example.com" name="email" required>
-          <span id="emailError" class="error-message"></span>
+          <input type="email" id="email" placeholder="name@example.com" name="email">
         </div>
 
         <div>
           <label for="password">Inserisci la password</label>
-          <input type="password" id="password" placeholder="Scrivila qui" name="password" required>
-          <span id="passwordError" class="error-message"></span>
+          <input type="password" id="password" placeholder="Scrivila qui" name="password">
         </div>
-
         <div class="submit-button">
-          <button type="submit" id="submitBtn">accedi</button>
+          <button type="submit" id="submitBtn">registrati</button>
         </div>
-
       </form>
-      <a href="./index.php">Non hai ancora un profilo?<b> Registrati</b></a>
+
+      <a href="./index.php">Hai già un account? <b>Accedi</b></a>
     </div>
   </main>
 
@@ -80,6 +86,7 @@
       <circle cx="1" cy="179" r="179" fill="white" />
     </svg>
   </div>
+
 </body>
 
 </html>

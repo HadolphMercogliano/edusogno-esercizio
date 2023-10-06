@@ -23,6 +23,10 @@ header {
   height: 15vh;
   border-radius:0  0 20px 20px;
   box-shadow: 0px 4px 18px -6px #0057FF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
 }
 
 header .logo {
@@ -31,6 +35,24 @@ header .logo {
 
 header > .logo > img{
   padding:20px 30px;
+}
+
+header > #logoutForm > button {
+  text-transform: uppercase;
+  border-radius: 11px;
+  background: #b80000;
+  padding: 0 10px;
+  color: white;
+  font-weight: 600;
+  line-height: 2rem;
+  cursor: pointer;
+  border: 1px solid #b80000;
+;
+}
+header > #logoutForm > button:hover {
+  background: white;
+  border: 1px solid #b80000;
+  color: #b80000;
 }
 
 /*************** MAIN ******************/
@@ -94,6 +116,16 @@ main > h1 {
   background-color: white;
   color: #0057FF;
 }
+
+.error-message {
+    display: block;
+    background-color: #ff9595;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid red;
+    border-radius: 10px;
+  }
 
 a {
   display: block;
