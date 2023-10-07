@@ -1,0 +1,67 @@
+.d-flex {
+  display: flex;
+}
+
+#btn-cancel {
+  background-color: grey;
+  color: black;
+  /* display: inline-block; */
+  margin:20px 0;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.btn.btn-add {
+  background-color: blue;
+  display: inline-block;
+  margin:20px 0;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tbody {
+  background-color: aliceblue;
+
+}
+tbody  td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.actions {
+  text-align: right;
+}
+
+table .btn {
+  display: inline-block;
+  background-color: rgb(255, 255, 14);
+  text-decoration: none;
+  color: black;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.btn.btn-delete {
+  display: inline-block;
+  background-color: red;
+  border: none;
+}
+.actions>form {
+  display: inline-block;
+}

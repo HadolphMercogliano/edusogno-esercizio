@@ -10,7 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $result = register($conn, $nome, $cognome, $email, $password);
 
   if ($result === true) {
-    header("Location: userArea.php");
+    if ($email === "admin@admin.com") { 
+        header("Location: admin/adminArea.php"); 
+      }
+       else { 
+        header("Location: userArea.php"); 
+      } 
     exit;
   } else {
     $error_message = $result;

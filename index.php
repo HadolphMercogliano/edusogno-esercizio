@@ -58,12 +58,12 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
           <label for="password">Inserisci la password</label>
           <input type="password" id="password" placeholder="Scrivila qui" name="password" required>
         </div>
+        <a class="resetPsw" href="./resetPswRequest.php">Password dimenticata?<b>Clicca qui!</b></a>
 
         <div class="button-container">
           <button type="submit" class="btn" id="submitBtn">accedi</button>
         </div>
       </form>
-      <a class="resetPsw" href="./resetPswRequest.php">Password dimenticata?<b>Clicca qui!</b></a>
 
 
       <a href="./register.php">Non hai ancora un profilo?<b> Registrati</b></a>

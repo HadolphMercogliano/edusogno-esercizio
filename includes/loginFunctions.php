@@ -17,10 +17,15 @@ function login($conn,$email,$password) {
       $_SESSION["user_name"] = $user['nome'];
       $_SESSION["user_surname"] = $user['cognome'];
       $_SESSION["user_email"] = $user['email'];
-      var_dump($user);
       session_write_close();
-      header("Location: userArea.php"); 
-    exit();
+      
+      if ($user['email'] === "admin@admin.com") { 
+        header("Location: admin/adminArea.php"); 
+      }
+       else { 
+        header("Location: userArea.php"); 
+      } 
+      exit(); 
   } else {
     return false;
   }
