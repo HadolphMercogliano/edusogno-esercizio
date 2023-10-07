@@ -13,19 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $attendees = $_POST["attendees"];
   $data_evento = $_POST["data_evento"];
 
-  // Crea un'istanza di Event con i dati del form
-  $event = new Event(null, $nome_evento, $attendees, $data_evento);
-
-  try {
-    // Aggiungi l'evento utilizzando il controller degli eventi
-    $eventController->addEvent($event);
-
-    // Reindirizza l'utente alla pagina di dashboard dopo l'aggiunta dell'evento
-    header("Location: adminArea.php");
-    exit;
+// Verifica delle regole di validazione
+  if (!$eventController->validateNotEmpty($nome_evento)) {
+    $error_message = "Il nome dell'evento non può essere vuoto.";
+  } 
+  elseif (!$eventController->validateNotEmpty($data_evento)) {
+    $error_message = "La data e l'ora dell'evento devono essere specificate.";
+  } 
+  else {
+    $event = new Event(null, $nome_evento, $attendees, $data_evento);
+    try {
+      // Aggiungi l'evento utilizzando il controller degli eventi
+      $eventController->addEvent($event);
+      // Reindirizza l'utente alla pagina di dashboard dopo l'aggiunta dell'evento
+      header("Location: adminArea.php");
+      exit;
   } catch (Exception $e) {
     $error_message = $e->getMessage();
   }
+}
 }
 ?>
 
@@ -61,11 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
         <div>
           <label for="attendees">Attendees</label>
-          <input type="text" id="attendees" name="attendees" required>
+          <input type="text" id="attendees" name="attendees">
         </div>
         <div>
           <label for="data_evento">Data e Ora:</label>
-          <input type="datetime-local" id="data_evento" name="data_evento" required>
+          <input type="datetime-local" id="data_evento" name="data_evento">
         </div>
         <div class="button-container d-flex">
           <button id="submitBtn" type="submit" class="btn">Aggiungi Evento</button>
