@@ -1,33 +1,37 @@
 <?php
-if (isset($_POST["email"]) && isset($_POST["password"])) {
-  
-  // se il form è stato inviato includo la connessione al database
+if (isset($_POST["email"])) {
   require_once __DIR__ . "/includes/database.php";
-  require_once __DIR__ . "/includes/loginFunctions.php";
-  
+  require_once __DIR__ . "/includes/resetPswFunctions.php";
 
   $email = $_POST["email"];
-  $password = md5($_POST["password"]);
-  
-  $success = login($conn, $email,$password);
 
-  if (!$success) {
-    $error_message = "Errore di login. Email o password non validi.";
+ 
+  if (checkEmailExists($conn, $email)) {    
+    $success_message = "La procedura è andata a buon fine. Controlla la tua email per ulteriori istruzioni.";
+
+  // $token = generatePasswordResetToken();
+  
+  // if (sendPasswordResetEmail($email, $token)) {
+  //     $success_message = "La procedura è andata a buon fine. Controlla la tua email per ulteriori istruzioni.";
+  //   } else {
+  //     $error_message = "Si è verificato un errore durante l'invio dell'email. Riprova più tardi.";
+  //   }
+  } else {
+    // L'email non è registrata nel database
+    $error_message = "Email non registrata.";
   }
 }
-
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./assets/styles/style.css">
-  <title>Edusogno - Login</title>
+  <title>Edusogno - Reset Password</title>
 </head>
 
 <body>
@@ -37,33 +41,28 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     </div>
   </header>
   <main>
-    <h1>Hai già un account?</h1>
+    <h1>Password reset</h1>
     <div class="form-area">
 
+      <!-- messaggi di avvenuto invio della mail di reset o errore -->
       <?php if (isset($error_message)): ?>
       <p class="error-message"><?php echo $error_message; ?></p>
+
+      <?php elseif (isset($success_message)): ?>
+      <p class="success-message"><?php echo $success_message; ?>
+        <a href="./index.php">Torna al login</a>
+      </p>
       <?php endif; ?>
 
       <form method="post">
-
         <div>
-          <label for="email">Inserisci l'email</label>
+          <label for="email">Inserisci la mail con cui ti sei registrato</label>
           <input type="email" id="email" placeholder="name@example.com" name="email" required>
         </div>
-
-        <div>
-          <label for="password">Inserisci la password</label>
-          <input type="password" id="password" placeholder="Scrivila qui" name="password" required>
-        </div>
-
         <div class="button-container">
-          <button type="submit" class="btn" id="submitBtn">accedi</button>
+          <button type="submit" class="btn" id="submitBtn">Reset</button>
         </div>
       </form>
-      <a class="resetPsw" href="./resetPsw.php">Password dimenticata?<b>Clicca qui!</b></a>
-
-
-      <a href="./register.php">Non hai ancora un profilo?<b> Registrati</b></a>
     </div>
   </main>
 
