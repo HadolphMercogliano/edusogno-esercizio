@@ -12,16 +12,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $attendees = $_POST["attendees"];
   $data_evento = $_POST["data_evento"];
 
-  $event = new Event($id_evento, $nome_evento, $attendees, $data_evento);
+  if (!$eventController->validateNotEmpty($nome_evento)) {
+    $error_message = "Il nome dell'evento non può essere vuoto.";
+  } elseif (!$eventController->validateNotEmpty($data_evento)) {
+    $error_message = "La data e l'ora dell'evento devono essere specificate.";
+  } else {
+   
+    $event = new Event($id_evento, $nome_evento, $attendees, $data_evento);
 
-  try {
+    try {
     $eventController->editEvent($id_evento, $event);
-    // Reindirizza l'utente alla pagina di dashboard dopo l'aggiornamento dell'evento
+    
     header("Location: adminArea.php");
     exit;
   } catch (Exception $e) {
     $error_message = $e->getMessage();
   }
+}
 }
 
 $id_evento = $_GET["id"];
