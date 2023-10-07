@@ -7,14 +7,19 @@ require_once('eventController.php');
 $eventController = new EventController($conn);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  
+  // Ottieni i dati dal form
   $nome_evento = $_POST["nome_evento"];
   $attendees = $_POST["attendees"];
   $data_evento = $_POST["data_evento"];
 
+  // Crea un'istanza di Event con i dati del form
   $event = new Event(null, $nome_evento, $attendees, $data_evento);
 
   try {
+    // Aggiungi l'evento utilizzando il controller degli eventi
     $eventController->addEvent($event);
+
     // Reindirizza l'utente alla pagina di dashboard dopo l'aggiunta dell'evento
     header("Location: adminArea.php");
     exit;
@@ -52,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <form method="post">
         <div>
           <label for="nome_evento">Nome Evento</label>
-          <input type="text" id="nome_evento" name="nome_evento" required>
+          <input type="text" id="nome_evento" name="nome_evento">
         </div>
         <div>
           <label for="attendees">Attendees</label>
@@ -69,6 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       </form>
     </div>
   </main>
+  <!-- WAVES & BACKGROUND ELEMENTS -->
+  <?php include '../includes/background.php'; ?>
 </body>
 
 </html>

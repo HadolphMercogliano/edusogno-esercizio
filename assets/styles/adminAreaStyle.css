@@ -1,18 +1,3 @@
-.d-flex {
-  display: flex;
-}
-
-#btn-cancel {
-  background-color: grey;
-  color: black;
-  /* display: inline-block; */
-  margin:20px 0;
-  padding: 5px 10px;
-  text-decoration: none;
-  font-weight: normal;
-  text-transform: capitalize;
-}
-
 .btn.btn-add {
   background-color: blue;
   display: inline-block;

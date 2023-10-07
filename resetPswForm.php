@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/includes/database.php";
-require_once __DIR__ . "/resetPswFunctions.php";
+ require_once "./includes/resetPswFunctions.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $token = $_GET["token"];

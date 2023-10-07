@@ -87,6 +87,8 @@ if (!$event) {
       </form>
     </div>
   </main>
+  <!-- WAVES & BACKGROUND ELEMENTS -->
+  <?php include '../includes/background.php'; ?>
 </body>
 
 </html>

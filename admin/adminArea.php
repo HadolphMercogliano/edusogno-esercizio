@@ -38,7 +38,12 @@ if(session_status() != PHP_SESSION_ACTIVE) {
  }
 
 if (isset($_POST["logout"])) {
-  logout();
+   if(session_status() != PHP_SESSION_ACTIVE) {
+    session_start();
+    session_destroy();
+    header("Location: ../index.php");
+    exit();
+  }
   session_write_close();
 }
 ?>
@@ -102,6 +107,8 @@ if (isset($_POST["logout"])) {
       </table>
     </div>
   </main>
+  <!-- WAVES & BACKGROUND ELEMENTS -->
+  <?php include '../includes/background.php'; ?>
 </body>
 
 </html>
