@@ -43,6 +43,9 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
       <?php if (isset($error_message)): ?>
       <p class="error-message"><?php echo $error_message; ?></p>
       <?php endif; ?>
+      <?php if (isset($_GET["success"]) && $_GET["success"] == 1): ?>
+      <p class='success-message'> Cambio password avvenuto con successo!</p>
+      <?php endif; ?>
 
       <form method="post">
 
@@ -60,7 +63,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
           <button type="submit" class="btn" id="submitBtn">accedi</button>
         </div>
       </form>
-      <a class="resetPsw" href="./resetPsw.php">Password dimenticata?<b>Clicca qui!</b></a>
+      <a class="resetPsw" href="./resetPswRequest.php">Password dimenticata?<b>Clicca qui!</b></a>
 
 
       <a href="./register.php">Non hai ancora un profilo?<b> Registrati</b></a>

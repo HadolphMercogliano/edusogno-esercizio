@@ -116,9 +116,26 @@ main > h1 {
   color: #0057FF;
 }
 
+/*************** MESSAGES ******************/
+.success-message {
+  display: block;
+    background-color: rgba(124, 255, 124, 0.795);
+    color: black;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #08c531;
+    border-radius: 10px;
+}
+
+.success-message > a {
+  padding-top: 5px;
+  text-align: left;
+
+}
+
 .error-message {
     display: block;
-    background-color: #ff9595;
+    background-color: rgba(255, 126, 126, 0.781);
     color: white;
     padding: 15px;
     margin-bottom: 10px;

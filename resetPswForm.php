@@ -1,47 +1,38 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+require_once __DIR__ . "/includes/database.php";
+require_once __DIR__ . "/resetPswFunctions.php";
 
-require __DIR__ . "../vendor/autoload.php";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $token = $_GET["token"];
+  $password = $_POST["password"];
+  $passwordConfirm = $_POST["password-confirm"];
 
-if (isset($_POST["email"])) {
-  require_once __DIR__ . "/includes/database.php";
-  require_once __DIR__ . "/resetPswFunctions.php";
+  if (checkPasswordsMatch($password, $passwordConfirm)) {
 
-  $email = $_POST["email"];
+    // Verifica se il token corrisponde nel database, in caso positivo ritorna la mail associata
+    $email = getEmailByResetToken($conn, $token);
+    if ($email) {
 
- 
-  if (checkEmailExists($conn, $email)) {    
-    $success_message = "La procedura è andata a buon fine. Controlla la tua email per ulteriori istruzioni.";
+      // Aggiorna la password associata al reset_token
+      updatePassword($conn, $email, $password);
 
-    // Crea il token per il reset password
-    $token = bin2hex(random_bytes(15));
-  
-    // Setta i parametri della mail
-    $subject = 'Reset Password';
-    $body = "<html><body>";
-    $body .= "<p>Ciao,</p>";
-    $body .= "<p>Hai richiesto il reset della password. Clicca sul seguente link per reimpostare la tua password:</p>";
-    $body .= "<p><a href=\"http://localhost/Esercizi%20Corso%20Boolean/edusogno-esercizio/resetPswForm.php?token=" . $token . "\">Reset Password</a></p>";
-    $body .= "</body></html>";
+      // Imposta il reset_token su NULL
+      clearResetToken($conn, $email);
 
-  if (sendEmail($email, $subject, $body)) {
-    
-    $success_message = "La procedura è andata a buon fine. Controlla la tua email per ulteriori istruzioni.";
-    
-    // Salva in db il token collegato all' utente
-    saveResetToken($conn, $email, $token);
+      // Reindirizza l'utente a una pagina di successo
+      header("Location: index.php?success=1");
+      exit;
+    } 
+    else {
+      $error_message = "Token non valido.";
+    }
   } 
   else {
-    $error_message = "Si è verificato un errore durante l'invio dell'email. Riprova più tardi.";
+    $error_message = "Le password non corrispondono.";
   }
-} 
-else {
-  $error_message = "Email non registrata.";
 }
-}
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -60,23 +51,16 @@ else {
     </div>
   </header>
   <main>
-    <h1>Password reset</h1>
+    <h1>Nuova password</h1>
     <div class="form-area">
-
-      <!-- messaggi di avvenuto invio della mail di reset o errore -->
-      <?php if (isset($error_message)): ?>
-      <p class="error-message"><?php echo $error_message; ?></p>
-
-      <?php elseif (isset($success_message)): ?>
-      <p class="success-message"><?php echo $success_message; ?>
-        <a href="./index.php">Torna al login</a>
-      </p>
-      <?php endif; ?>
-
       <form method="post">
         <div>
-          <label for="email">Inserisci la mail con cui ti sei registrato</label>
-          <input type="email" id="email" placeholder="name@example.com" name="email" required>
+          <label for="password">Inserisci la nuova password</label>
+          <input type="password" id="password" placeholder="" name="password" required>
+        </div>
+        <div>
+          <label for="password-confirm">Conferma la nuova password</label>
+          <input type="password" id="password-confirm" placeholder="" name="password-confirm" required>
         </div>
         <div class="button-container">
           <button type="submit" class="btn" id="submitBtn">Reset</button>
