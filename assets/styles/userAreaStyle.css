@@ -1,0 +1,48 @@
+.events-container {
+  max-width: 80%;
+  padding: 20px 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+h2 {
+  text-align: center;
+  color: #134077;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 19px;
+  border: 1px solid #134077;
+  background: white;
+}
+
+.event-card >h3 {
+  margin: 10px 0;
+}
+
+.event-card > p {
+  color: #CCC;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.event-card > button {
+  background: #0057FF;
+  border: 1px solid #0057FF;
+  padding: 5px 10px;
+  margin-top: 20px;
+  width: 50%;
+  align-self: center;
+}
+
+.event-card > button:hover {
+  background-color: white;
+  color: #0057FF;
+}

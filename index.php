@@ -3,7 +3,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
   
   // se il form è stato inviato includo la connessione al database
   require_once __DIR__ . "/includes/database.php";
-  require_once __DIR__ . "/includes/functions.php";
+  require_once __DIR__ . "/includes/loginFunctions.php";
   
 
   $email = $_POST["email"];
@@ -27,7 +27,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./assets/styles/style.css">
-  <title>Edusogno</title>
+  <title>Edusogno - Login</title>
 </head>
 
 <body>
@@ -56,8 +56,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
           <input type="password" id="password" placeholder="Scrivila qui" name="password" required>
         </div>
 
-        <div class="submit-button">
-          <button type="submit" id="submitBtn">accedi</button>
+        <div class="button-container">
+          <button type="submit" class="btn" id="submitBtn">accedi</button>
         </div>
 
       </form>

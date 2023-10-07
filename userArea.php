@@ -1,20 +1,25 @@
 <?php
+require_once __DIR__ . "/includes/loginFunctions.php";
+require_once __DIR__ . "/includes/database.php";
+
 if(session_status() != PHP_SESSION_ACTIVE) {
   session_start();
   if (isset($_SESSION["user_name"])) {
     $nome = $_SESSION["user_name"];
-    
+    $email = $_SESSION["user_email"];
+    $cognome = $_SESSION["user_surname"];
+    $events = fetch_events($email, $conn);
   }
   else {
     header("Location: index.php");
     exit;
   }
+  
   session_write_close();
 }
-
+ 
 
 if (isset($_POST["logout"])) {
-    require_once __DIR__ . "/includes/functions.php";
     logout();
     session_write_close();
   }
@@ -28,7 +33,9 @@ if (isset($_POST["logout"])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./assets/styles/style.css">
-  <title>Edusogno</title>
+  <link rel="stylesheet" href="./assets/styles/userAreaStyle.css">
+
+  <title>Edusogno - Area Utente</title>
 </head>
 
 <body>
@@ -37,11 +44,27 @@ if (isset($_POST["logout"])) {
       <img src="https://edusogno.com/logo-black.svg" alt="">
     </div>
     <form id="logoutForm" method="POST">
-      <button name="logout" value="1">Logout</button>
+      <button class="btn" name="logout" value="1">Logout</button>
     </form>
   </header>
   <main>
-    <h1>ciao <?php echo $nome; ?> ecco le tue taks</h1>
+    <h1>Ciao <?php echo $nome . " " . $cognome; ?> ecco i tuoi eventi</h1>
+    <div class="events-container">
+      <?php if (isset($events) && count($events) > 0): ?>
+      <?php foreach ($events as $event): ?>
+      <div class="event-card">
+        <h3><?= $event["nome_evento"]  ?></h3>
+        <p>Data evento: <?= $event["data_evento"]?></p>
+        <button class="btn">join</button>
+      </div>
+      <?php endforeach; ?>
+      <?php else: ?>
+      <div class="event-card">
+        <h2>Non hai eventi programmati</h2>
+      </div>
+    </div>
+
+    <?php endif; ?>
   </main>
 
   <!-- WAVES & BACKGROUND ELEMENTS -->

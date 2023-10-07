@@ -38,16 +38,12 @@ header > .logo > img{
 }
 
 header > #logoutForm > button {
-  text-transform: uppercase;
-  border-radius: 11px;
+ 
   background: #b80000;
   padding: 0 10px;
-  color: white;
   font-weight: 600;
   line-height: 2rem;
-  cursor: pointer;
   border: 1px solid #b80000;
-;
 }
 header > #logoutForm > button:hover {
   background: white;
@@ -95,20 +91,23 @@ main > h1 {
   border-bottom: 1px solid black;
 }
 
-.submit-button {
+.button-container {
+  margin: 40px 0;
   display: flex;
   justify-content: center;
-  margin: 40px 0;
 }
 
-#submitBtn {
+.btn {
   text-transform: uppercase;
   border-radius: 11px;
-  background: #0057FF;
   color: white;
   font-weight: 600;
-  line-height: 2.5rem;
   cursor: pointer;
+
+}
+#submitBtn {
+  background: #0057FF;
+  line-height: 2.5rem;
   border: 1px solid #0057FF;
 }
 
